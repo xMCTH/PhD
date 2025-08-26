@@ -1,3 +1,51 @@
+"""
+Phantom vs. Subject Measurement Processing Script
+-------------------------------------------------
+
+This script processes two fitted MRSI measurement `.txt` files: one from a phantom and one from a subject.
+It extracts voxel-wise metabolite data, allows the user to filter metabolites of interest,
+generates quick previews and optionally exports results to Excel with profile corrected results.
+
+Workflow:
+1. Prompts the user to select:
+   - Phantom measurement TXT file
+   - Subject measurement TXT file
+2. Parses the files into structured entries, extracting voxel coordinates (x, y, z)
+   and measurement parameters.
+3. Lists all available metabolites, then asks the user to select one or more metabolites
+   for analysis.
+4. Displays a preview of filtered data (coordinate, metabolite, area, and LDamping).
+5. If the user opts to save to Excel:
+   - Creates a workbook containing:
+     - An **"all" sheet** with phantom (_p) and subject (_s) data aligned by voxel coordinates.
+       Includes formulas for:
+         • Height = Area / LDamping
+         • FWHM = LDamping / π
+         • I0ps = Height * EXP(TE / FWHM)
+         • I0 = I0ps * (1 - EXP(-TR / T1))
+     - Per-slice sheets (z-value separated) for both phantom and subject data.
+     - Extra calculated concentration columns (`Pc [mM]`, `c [mM]`).
+   - Ensures all formulas dynamically link across sheets for consistency.
+   - Saves the workbook to a user-selected `.xlsx` file.
+
+Dependencies:
+- Python standard library (`os`, `tkinter`)
+- Third-party libraries:
+  • numpy
+  • pandas
+  • matplotlib
+  • openpyxl
+
+Usage:
+- Run the script in Python.
+- Select two `.txt` measurement files when prompted.
+- Choose metabolites of interest.
+- Optionally export results to Excel with formulas grouped by z-value.
+
+
+"""
+
+
 import os
 import numpy as np
 import pandas as pd
