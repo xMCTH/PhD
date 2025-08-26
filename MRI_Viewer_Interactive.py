@@ -1,3 +1,43 @@
+"""
+Interactive DICOM Viewer with Brightness Control
+------------------------------------------------
+
+This script loads DICOM image files from a specified folder and displays them one by one
+with an interactive brightness slider. It allows easy visualization and adjustment of
+grayscale intensity of MRI data.
+
+Workflow:
+1. Define the path to a folder containing `.dcm` DICOM files (`dcm_folder`).
+2. Iterates through all DICOM files in the folder.
+3. For each file:
+   - Reads metadata (Patient Name, Modality, Study Date).
+   - Extracts the pixel array from the DICOM object.
+   - Displays the image using Matplotlib in grayscale.
+   - Provides a slider to interactively adjust brightness in real time.
+4. Normalizes image intensities to [0,1] for consistent visualization.
+
+Key Features:
+- Interactive brightness adjustment using Matplotlib’s `Slider` widget.
+- Automatic DICOM metadata extraction and display in the console.
+- Compatible with PyCharm or other IDEs by explicitly setting
+  the Matplotlib backend to `TkAgg`.
+
+Dependencies:
+- Python standard library (`os`)
+- Third-party libraries:
+  • numpy
+  • matplotlib
+  • pydicom
+
+Usage:
+- Update the `dcm_folder` variable with the path to your DICOM folder.
+- Run the script in Python.
+- Scroll through all `.dcm` files in the folder.
+- Adjust brightness with the slider to enhance visibility.
+
+"""
+
+
 import matplotlib
 matplotlib.use('TkAgg')  # Use TkAgg backend for interactive sliders in PyCharm
 
