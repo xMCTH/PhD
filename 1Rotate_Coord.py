@@ -1,3 +1,29 @@
+"""
+Voxel Coordinate Rotation Script
+--------------------------------
+
+This script allows you to rotate voxel coordinate data stored in a text file of fitted MRSI data.
+It can be used, if for a profile correction of a subject measurement, the phantom measurement is not rotated the same way in the raster.
+Workflow:
+1. Prompts the user to select an input `.txt` file containing voxel coordinate blocks.
+   - Each voxel block is expected to have a "Coord" header line, a data line with
+     coordinates in the format "X_Y_Z" followed by tab-separated fields, and an end line.
+2. Asks the user for a rotation angle (90, 180, or 270 degrees).
+   - Rotation is applied around the Z-axis in a 3D grid of size GRID_X × GRID_Y × GRID_Z.
+3. Applies the chosen rotation to each voxel’s (x, y, z) coordinates while preserving
+   the rest of the data.
+4. Prompts the user to choose a save location and writes the rotated voxel data to
+   a new `.txt` file.
+
+Dependencies:
+- Python standard library (`tkinter`, `os`)
+
+Usage:
+- Run the script, choose an input file, specify a rotation angle, and save the rotated output.
+
+"""
+
+
 import tkinter as tk
 from tkinter import filedialog, simpledialog
 import os
